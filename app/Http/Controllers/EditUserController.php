@@ -70,12 +70,20 @@ class EditUserController extends Controller
         //     'msg' => '正しい入力です'
         //     ]);
         
+        $image_url = null;
+        if(!empty($request['image_url'])) {
+            $filename = $request->image_url->getClientOriginalName();
+            $image_url = $request->image_url->storeAs('',$filename,'public');
+        } else if(!empty($request['image_url_before'])) {
+            $image_url = $request['image_url_before'];
+        }
+        
         $param = [
             'name' => $request['name'],
             'email' => $request['email'],
             'tel_number' => $request['tel_number'],
             'profile' => $request['profile'],
-            'image_url' => $request['image_url'],
+            'image_url' => $image_url,
             'update_user' => $request['name'],
             'updated_at' => Carbon::now()
         ];

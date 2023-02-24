@@ -7,7 +7,7 @@
         @endforeach
     @endif
     {{-- formタグ開始タグ（routeがtimeline、HTTPメソッドはPOST）を書く --}}
-    {!! Form::open(['route' => 'timeline', 'method' => 'POST']) !!}
+    {!! Form::open(['route' => 'timeline', 'method' => 'POST','enctype' => 'multipart/form-data']) !!}
     <div class="row mb-4">
         @guest
         <div class = "col-sm-12">
@@ -15,7 +15,7 @@
         @else
         <div class="col-sm-4">
         @if (isset($user->image_url))
-            <img src={{ $image_url }} width=30% height=auto><br>
+            <img src={{ asset('storage/'.$user->image_url) }} width=30% height=auto><br>
         @else
             <img src="https://thumb.ac-illust.com/e2/e2cb85acf732de018702298367234d84_t.jpeg" width=30% height=auto><br>
         @endif
@@ -37,14 +37,14 @@
                             <strong>{{ $tweet->created_user }}</strong> {{ $tweet->created_at }}
                             <div>{{ $tweet->tweet }}</div>
                             @if (isset($tweet->image_url))
-                                <img src={{ asset('storage/',$tweet->image_url) }} width=100% height=auto><br>
+                                <img src={{ asset('storage/'.$tweet->image_url) }} width=100% height=auto><br>
                             @endif
                             {{-- 第6回　例題5 --}}
-                            @if (isset($user->image_url))
-                                <img src={{ $image_url }} width=30% height=auto><br>
-                            @else
-                                <img src="https://thumb.ac-illust.com/e2/e2cb85acf732de018702298367234d84_t.jpeg" width=30% height=auto><br>
-                            @endif
+                            <!--@if (isset($user->image_url))-->
+                            <!--    <img src={{ asset('storage/'.$tweet->image_url) }} width=30% height=auto><br>-->
+                            <!--@else-->
+                            <!--    <img src="https://thumb.ac-illust.com/e2/e2cb85acf732de018702298367234d84_t.jpeg" width=30% height=auto><br>-->
+                            <!--@endif-->
                         </td>
                     </tr>
                 @endforeach

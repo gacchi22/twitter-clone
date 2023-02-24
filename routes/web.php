@@ -30,3 +30,5 @@ Route::get('/edituser', 'EditUserController@showEditUserPage')->name('edit');
 // Route::get('/editcomplete', 'EditUserController@editComplete')->name('editcomplete');
 
 Route::post('/editcomplete', 'EditUserController@editComplete')->name('editcomplete');
+
+Route::get('/user', 'UserController@showUserPage')->name('user');

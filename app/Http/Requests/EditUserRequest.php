@@ -31,8 +31,8 @@ class EditUserRequest extends FormRequest
             'name' => ['required','string','max:50'],
             'email' => ['required','string','email','max:50'],
             'tel_number' => ['nullable','string','regex:/^[0-9-]{10,13}$/'],
-            'image_url' => ['nullable','mimes:jpg,jpeg,png,gif','max:50'],
-            'profile' => ['nullable','string','max:50'],
+            'image_url' => ['nullable','mimes:jpg,jpeg,png,gif','max:200'],
+            'profile' => ['nullable','string','max:200'],
         ];
     }
     

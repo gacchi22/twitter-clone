@@ -67,8 +67,8 @@
                                 </form>
                             </li>
                             <li class="nav-item">
-                                <a class="dropdown-item" href="" onclick="event.preventDefault(); document.getElementById('user-form').submit();">{{ __('User Page') }}</a>
-                                <form id="user-form" action="" method="GET" class="d-none">
+                                <a class="dropdown-item" href="{{ route('user') }}" onclick="event.preventDefault(); document.getElementById('user-form').submit();">{{ __('User Page') }}</a>
+                                <form id="user-form" action="{{ route('user') }}" method="GET" class="d-none">
                                     @csrf
                                 </form>
 
