@@ -13,11 +13,15 @@ use App\Http\Requests\EditUserRequest;
 
 use Carbon\Carbon;
 
+use App\User;
+
+use App\Tweet;
+
 class EditUserController extends Controller
 {
     public function showEditUserPage()
     {
-        $user = DB::table('users')->where('id',Auth::user()->id)->first();
+        $user = User::where('id',Auth::user()->id)->first();
         return view('edit',[
             // 'image_url' => 'https://thumb.ac-illust.com/77/77d8905d1a9192f70ecacde86aae5de6_t.jpeg',
             'user' => $user,
@@ -88,11 +92,19 @@ class EditUserController extends Controller
             'updated_at' => Carbon::now()
         ];
         
-        DB::table('users')->where('id', Auth::user()->id)->update($param);
-        $tweets = DB::table('tweets')->where('user_id', Auth::user()->id)->get();
-        $user = DB::table('users')->where('id', Auth::user()->id)->first();
+        $user = User::find(Auth::user()->id);
+        $input = $request->all();
+        $user->fill($input);
+        $user->image_url = $image_url;
+        $user->update_user = Auth::user()->name;
+        $user->save();
         
-        return view ('edit',[
+        
+        // DB::table('users')->where('id', Auth::user()->id)->update($param);
+        $tweets = Tweet::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+        $user = User::where('id',Auth::user()->id)->first();
+        
+        return view ('user',[
             'user' => $user,
             'tweets' => $tweets
         ]);
