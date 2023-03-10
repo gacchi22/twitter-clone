@@ -101,7 +101,7 @@ class EditUserController extends Controller
         
         
         // DB::table('users')->where('id', Auth::user()->id)->update($param);
-        $tweets = Tweet::where('user_id',Auth::user()->id)->orderBy('created_at','desc')->get();
+        $tweets = User::find(Auth::user()->id)->tweets->sortByDesc('created_at');
         $user = User::where('id',Auth::user()->id)->first();
         
         return view ('user',[
